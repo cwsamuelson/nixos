@@ -1,3 +1,17 @@
+#	Plausibly the most minimal installation available
+#{ config, pkgs, ... }: {
+#  imports = [
+#  # Include the results of the hardware scan.
+#    ./hardware-configuration.nix
+#  ];
+
+#  boot.loader.grub.device = "/dev/sda";   # (for BIOS systems only)
+#  boot.loader.systemd-boot.enable = true; # (for UEFI systems only)
+
+#  # Enable the OpenSSH server.
+#  services.sshd.enable = true;
+#}
+
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
