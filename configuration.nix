@@ -1,4 +1,7 @@
-#	Plausibly the most minimal installation available
+# Profile baselines/examples, including a true minimum; this minimum is probably broken
+# https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/profiles
+
+# Plausibly the most minimal installation available
 #{ config, pkgs, ... }: {
 #  imports = [
 #  # Include the results of the hardware scan.
