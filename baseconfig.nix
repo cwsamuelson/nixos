@@ -5,10 +5,17 @@
 
   time.timeZone = "America/New_York";
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nixGL.packages = nixgl.packages;
+ 
+  fonts.fontconfig.enable = true;
+
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
   virtualisation.docker = {
     enable = true;

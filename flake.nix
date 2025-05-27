@@ -44,7 +44,7 @@
         ];
       };
 
-      makeHM = { user, stateVersion }: home-manager.lib.homeManagerConfiguration {
+      makeHM = { username, stateVersion }: home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs = {
           inherit inputs stateVersion username;

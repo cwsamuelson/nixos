@@ -1,11 +1,13 @@
 { stateVersion, username, ... }: {
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     ./modules
     ./packages.nix
   ];
 
   home = {
-    homeDirectory = "/home/${user}";
+    homeDirectory = "/home/${username}";
     inherit username stateVersion;
   };
 }

@@ -30,6 +30,10 @@
 
     # manual additions to bashrc
     initExtra = ''
+      function varfind() {
+        find $${!1//:/ } -name $2 2>/dev/null
+      }
+
       function highlight() {
         egrep --color=always "''${1}|$" $2
       }
