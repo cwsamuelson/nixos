@@ -16,9 +16,15 @@
     };
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
+
+    #my-app = {
+    #  url = "path:/home/chris/wrappers/init.bash";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
   outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }@inputs:
+  #outputs = { self, nixpkgs, nixos-wsl, home-manager, my-app, ... }@inputs:
     let
       system = "x86_64-linux";
       #users = [
@@ -52,6 +58,7 @@
 
         modules = [
           ./users/${username}/home.nix
+          #my-app.homeManagerModules.my-app
         ];
       };
     in {

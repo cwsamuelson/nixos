@@ -10,4 +10,6 @@
     homeDirectory = "/home/${username}";
     inherit username stateVersion;
   };
+
+  #programs.my-app.enable = true;
 }

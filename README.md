@@ -13,3 +13,12 @@ https://github.com/Misterio77/nix-starter-configs
 https://codeberg.org/justgivemeaname/.dotfiles
 https://borretti.me/article/nixos-for-the-impatient#upgrading
 
+```bash
+nix flake update
+home-manager switch --flake .
+```
+
+```bash
+nix flake update
+sudo nixos-rebuild switch --flake .#laptop-fw
+```
