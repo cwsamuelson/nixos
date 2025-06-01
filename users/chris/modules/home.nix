@@ -17,7 +17,8 @@
       # search as array:
       # name = "find \"${array[@]}\" -iname "$file"
 
-      switch = "home-manager switch";
+      switch-home = "home-manager switch --flake ~/.config/home-manager";
+      switch-os = "nixos-rebuild switch --flake ~/.config/home-manager";
       # -l list vertically, with add metadata
       # -h human readable file sizes
       # -A 'all', but excluding '.' and '..'
