@@ -14,6 +14,8 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
 
     init-bash.url = "path:/home/chris/wrappers/example";
+
+    #nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs = { self, nixpkgs, nixos-wsl, home-manager, init-bash, ... }@inputs:
@@ -50,7 +52,7 @@
         };
 
         modules = [
-          ./baseconfig.nix
+          ./base/config.nix
           ./hosts/${hostname}/configuration.nix
         ];
       };

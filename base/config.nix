@@ -1,14 +1,6 @@
 { pkgs, hostname, ... }: {
   nixpkgs.config.allowUnfree = true;
 
-  #system.copySystemConfiguration = true;
-
-  time.timeZone = "America/New_York";
-
-  nixGL.packages = nixgl.packages;
- 
-  fonts.fontconfig.enable = true;
-
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [
@@ -16,6 +8,20 @@
       "flakes"
     ];
   };
+
+  imports = [
+    ./afl.nix
+  ];
+
+  # :(
+  #system.copySystemConfiguration = true;
+
+  time.timeZone = "America/New_York";
+
+  # I don't think this belongs here anyway..
+  #nixGL.packages = nixgl.packages;
+ 
+  fonts.fontconfig.enable = true;
 
   virtualisation.docker = {
     enable = true;
@@ -78,34 +84,29 @@
       "getty@tty1".enable = false;
       "autovt@tty1".enable = false;
     };
-
-    # changed for AFL fuzzer
-    coredump.enable = false;
   };
 
-  # changed for AFL fuzzer; might want it anyway...
-  powerManagement.cpuFreqGovernor = "performance";
-
   services = {
+    displayManager = {
+      # Enable automatic login
+      autoLogin = {
+        enable = true;
+        user = "chris";
+      };
+    };
+
     xserver = {
       enable = true;
 
       # Enable the GNOME Desktop Environment.
       desktopManager.gnome.enable = true;
-
-      displayManager = {
-        gdm.enable = true;
-
-        # Enable automatic login
-	autoLogin = {
-          enable = true;
-          user = "chris";
-	};
-      };
+      displayManager.gdm.enable = true;
 
       # Configure keymap in X11
-      layout = "us";
-      xkbVariant = "dvp";
+      xkb = {
+        layout = "us";
+        variant = "dvp";
+      };
 
       # Enable touchpad support (enabled default in most desktopManager).
       # libinput.enable = true;
