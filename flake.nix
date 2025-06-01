@@ -32,19 +32,6 @@
         { hostname = "laptop-fw"; stateVersion = "24.11"; }
       ];
 
-      #forAllSystems = function:
-      #  nixpkgs.lib.genAttrs [
-      #    "x86_64-linux"
-      #    "aarch64-linux"
-      #  ] (system:
-      #    function (import nixpkgs {
-      #      inherit system;
-      #      config.allowUnfree = true;
-      #      overlays = [
-      #        inputs.something.overlays.default
-      #      ];
-      #  }));
-
       makeSystem = { hostname, stateVersion, ... }: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
@@ -52,7 +39,8 @@
         };
 
         modules = [
-          ./base/config.nix
+          ./hosts/modules
+          ./hosts/base/config.nix
           ./hosts/${hostname}/configuration.nix
         ];
       };
@@ -67,8 +55,6 @@
           };
         };
 
-        #pkgs = nixpkgs.legacyPackages.${system};
-
         extraSpecialArgs = {
           inherit inputs stateVersion username system;
           init-bash = inputs.init-bash;
@@ -76,12 +62,6 @@
 
         modules = [
           ./users/${username}/home.nix
-
-          #{
-          #  home.packages = [
-          #    init-bash.packages.x86_64-linux.default
-          #  ];
-          #}
         ];
       };
     in {
@@ -104,4 +84,3 @@
       #  }) {} users;
     };
 }
-
