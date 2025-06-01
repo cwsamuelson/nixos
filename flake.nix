@@ -61,6 +61,7 @@
 
         extraSpecialArgs = {
           inherit inputs stateVersion username system;
+          init-bash = inputs.init-bash;
         };
 
         modules = [
