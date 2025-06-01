@@ -40,7 +40,7 @@
 
         modules = [
           ./hosts/modules
-          ./hosts/base/config.nix
+          ./hosts/base
           ./hosts/${hostname}/configuration.nix
         ];
       };

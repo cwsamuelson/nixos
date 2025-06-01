@@ -1,5 +1,5 @@
 {
   imports = [
-    ./fuzzer.nix
+    ./fuzzing.nix
   ];
 }

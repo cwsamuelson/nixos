@@ -1,6 +1,8 @@
 { pkgs, hostname, ... }: {
   nixpkgs.config.allowUnfree = true;
 
+  fuzzing.enable = true;
+
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [
@@ -10,7 +12,6 @@
   };
 
   imports = [
-    ./afl.nix
   ];
 
   # :(
