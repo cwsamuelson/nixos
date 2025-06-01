@@ -1,14 +1,10 @@
-#packages.x86_64-linux.nixosConfigurations."wsl".config.system.build.nixos-rebuild
-#legacyPackages.x86_64-linux.nixosConfigurations."wsl".config.system.build.nixos-rebuild
-#nixosConfigurations."wsl".config.system.build.nixos-rebuild
+# https://ayats.org/blog/no-flake-utils
 
 {
   description = "Basic flake for configuration of my 3 NixOS environments";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-
-    #flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -17,14 +13,10 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
 
-    #my-app = {
-    #  url = "path:/home/chris/wrappers/init.bash";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    #init-bash.url = "path:/home/chris/wrappers/example";
   };
 
   outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }@inputs:
-  #outputs = { self, nixpkgs, nixos-wsl, home-manager, my-app, ... }@inputs:
     let
       system = "x86_64-linux";
       #users = [
@@ -38,7 +30,20 @@
         { hostname = "laptop-fw"; stateVersion = "24.11"; }
       ];
 
-      makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {
+      #forAllSystems = function:
+      #  nixpkgs.lib.genAttrs [
+      #    "x86_64-linux"
+      #    "aarch64-linux"
+      #  ] (system:
+      #    function (import nixpkgs {
+      #      inherit system;
+      #      config.allowUnfree = true;
+      #      overlays = [
+      #        inputs.something.overlays.default
+      #      ];
+      #  }));
+
+      makeSystem = { hostname, stateVersion, ... }: nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = {
           inherit inputs stateVersion hostname username nixos-wsl;
@@ -50,15 +55,22 @@
         ];
       };
 
-      makeHM = { username, stateVersion }: home-manager.lib.homeManagerConfiguration {
+      makeHM = { username, stateVersion }:
+      home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
+
         extraSpecialArgs = {
-          inherit inputs stateVersion username;
+          inherit inputs stateVersion username system;
         };
 
         modules = [
           ./users/${username}/home.nix
-          #my-app.homeManagerModules.my-app
+
+          #{
+          #  home.packages = [
+          #    init-bash.packages.x86_64-linux.default
+          #  ];
+          #}
         ];
       };
     in {
@@ -72,6 +84,7 @@
       homeConfigurations.chris = makeHM {
         inherit username stateVersion;
       };
+
       #homeConfigurations = nixpkgs.lib.foldl' (configs: user:
       #  configs // {
       #    "${user.username}" = makeHM {
