@@ -44,7 +44,7 @@
       #  }));
 
       makeSystem = { hostname, stateVersion, ... }: nixpkgs.lib.nixosSystem {
-        system = system;
+        inherit system;
         specialArgs = {
           inherit inputs stateVersion hostname username nixos-wsl;
         };
@@ -57,7 +57,15 @@
 
       makeHM = { username, stateVersion }:
       home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+            allowUnfreePredicate = (_: true);
+          };
+        };
+
+        #pkgs = nixpkgs.legacyPackages.${system};
 
         extraSpecialArgs = {
           inherit inputs stateVersion username system;
@@ -67,11 +75,11 @@
         modules = [
           ./users/${username}/home.nix
 
-          {
-            home.packages = [
-              init-bash.packages.x86_64-linux.default
-            ];
-          }
+          #{
+          #  home.packages = [
+          #    init-bash.packages.x86_64-linux.default
+          #  ];
+          #}
         ];
       };
     in {

@@ -1,4 +1,4 @@
-{ pkgs, stateVersion, username, system, init-bash, ... }:
+{ pkgs, config, stateVersion, username, system, init-bash, ... }:
 let
   userScripts = pkgs.runCommand "apps" {} ''
     mkdir -p $out
@@ -9,28 +9,19 @@ let
 
   fullWrapped = pkgs.runCommand "wrapped-apps" {} ''
     mkdir -p $out/bin
-    #cp -r ${init-bash}/bin/* $out/bin
+    cp -r ${init-bash.packages.${system}.default}/bin/* $out/bin
 
     mkdir -p $out/bin/apps
-    #cp -r ${userScripts}/* $out/bin/apps
+    cp -r ${userScripts}/* $out/bin/apps
   '';
 in
 {
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnfreePredicate = (_: true);
-  };
-
   imports = [
     ./modules
     ./packages.nix
   ];
 
-  home = {
-    homeDirectory = "/home/${username}";
-    inherit username stateVersion;
-    packages = [
-      fullWrapped
-    ];
+  config._module.args = {
+    inherit username stateVersion fullWrapped;
   };
 }

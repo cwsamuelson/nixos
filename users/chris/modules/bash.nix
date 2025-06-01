@@ -1,4 +1,4 @@
-{ pkgs, system, ... }: {
+{ pkgs, system, fullWrapped, ... }: {
   programs.bash = {
     enable = true;
 
@@ -32,13 +32,12 @@
     # bin/lib/apps.bash: line 5: pushd: /nix/store/.../bin/apps: No such file or directory
     # bin/lib/apps.bash: line 31: popd: directory stack empty
     profileExtra = ''
-      # $${init-bash.packages.${system}.default}
-      #source $${init-bash.packages.x86_64-linux.default}/bin/init.bash
+      #source ${fullWrapped}/bin/init.bash
     '';
 
     # manual additions to bashrc
     initExtra = ''
-      #source $${init-bash.packages.x86_64-linux.default}/bin/init.bash
+      #source ${fullWrapped}/bin/init.bash
 
       function varfind() {
         find $${!1//:/ } -name $2 2>/dev/null
