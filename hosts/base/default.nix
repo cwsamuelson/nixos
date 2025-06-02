@@ -2,6 +2,15 @@
   nixpkgs.config.allowUnfree = true;
 
   fuzzing.enable = true;
+  x.enable = true;
+  user = {
+    username = "chris";
+    name = "Chris Samuelson";
+  };
+  networks = {
+    hostname = hostname;
+    firewall.activeServices = [];
+  };
 
   nix = {
     package = pkgs.nix;
@@ -11,41 +20,12 @@
     ];
   };
 
-  imports = [
-  ];
-
   # :(
   #system.copySystemConfiguration = true;
 
   time.timeZone = "America/New_York";
 
-  # I don't think this belongs here anyway..
-  #nixGL.packages = nixgl.packages;
- 
   fonts.fontconfig.enable = true;
-
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
-
-  users.users.chris = {
-    isNormalUser = true;
-    uid = 1000;
-    #primaryGroup = "chris";
-    description = " Chris Samuelson";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [
-      home-manager
-    ];
-  };
-
-  users.groups.chris = {
-    gid = 1000;
-  };
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -65,19 +45,6 @@
 
   boot.loader.grub.enable = false;
 
-  networking = {
-    networkmanager.enable = true;
-
-    hostName = hostname;
-
-    # Open ports in the firewall.
-    #   53317 is for localsend
-    # firewall.allowedTCPPorts = [ 53317 ];
-    # firewall.allowedUDPPorts = [ ... ];
-    # Or disable the firewall altogether.
-    # firewall.enable = false;
-  };
-
   # Workaround for GNOME autologin:
   #   https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd = {
@@ -88,14 +55,6 @@
   };
 
   services = {
-    displayManager = {
-      # Enable automatic login
-      autoLogin = {
-        enable = true;
-        user = "chris";
-      };
-    };
-
     xserver = {
       enable = true;
 

@@ -21,7 +21,7 @@ in
       description = "Extra packages to install with the fuzzing.";
     };
 
-    options.fuzzing.engine = mkOption {
+    engine = mkOption {
       type = types.enum [ 
         "aflplusplus"
         "honggfuzz"
