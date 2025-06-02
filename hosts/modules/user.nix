@@ -6,18 +6,18 @@ in
 {
   options.user = {
     username = mkOption {
-      type = types.string;
+      type = types.str;
       description = "User's username.";
     };
 
     name = mkOption {
-      type = types.string;
+      type = types.str;
       default = "";
       description = "User's given name.";
     };
 
     groups = mkOption {
-      type = types.listOf types.string;
+      type = types.listOf types.str;
       default = [];
       description = "";
     };

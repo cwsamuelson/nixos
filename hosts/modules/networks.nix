@@ -22,7 +22,7 @@ in
 {
   options.networks = {
     hostname = mkOption {
-      type = types.string;
+      type = types.str;
 
       description = "";
     };

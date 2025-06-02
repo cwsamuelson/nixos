@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.x;
+  cfg = config.cntnr;
 in
 {
-  options.x = {
+  options.cntnr = {
     enable = mkEnableOption "Containerization support";
 
     engine = mkOption {
@@ -12,7 +12,7 @@ in
         "docker"
         "podman"
         # lxc?
-        # nix x?
+        # nix containers?
       ];
 
       default = "docker";

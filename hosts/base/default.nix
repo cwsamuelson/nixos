@@ -2,7 +2,7 @@
   nixpkgs.config.allowUnfree = true;
 
   fuzzing.enable = true;
-  x.enable = true;
+  cntnr.enable = true;
   user = {
     username = "chris";
     name = "Chris Samuelson";
