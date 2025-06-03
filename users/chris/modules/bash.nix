@@ -29,15 +29,13 @@
     ];
 
     # manual additions to bash_profile
-    # bin/lib/apps.bash: line 5: pushd: /nix/store/.../bin/apps: No such file or directory
-    # bin/lib/apps.bash: line 31: popd: directory stack empty
     profileExtra = ''
-      #source ${fullWrapped}/bin/init.bash
+      source ${fullWrapped}/bin/init.bash
     '';
 
     # manual additions to bashrc
     initExtra = ''
-      #source ${fullWrapped}/bin/init.bash
+      source ${fullWrapped}/bin/init.bash
 
       function varfind() {
         find $${!1//:/ } -name $2 2>/dev/null
