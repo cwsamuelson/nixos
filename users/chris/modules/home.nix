@@ -1,10 +1,7 @@
-{ pkgs, username, stateVersion, fullWrapped, ... }: {
+{ pkgs, username, stateVersion, init-bash, ... }: {
   home = {
     homeDirectory = "/home/${username}";
     inherit username stateVersion;
-    packages = [
-      fullWrapped
-    ];
 
     sessionVariables = {
       CONAN_PASSWORD="demo";

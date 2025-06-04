@@ -13,7 +13,10 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
 
-    init-bash.url = "path:/home/chris/wrappers/example";
+    init-bash = {
+      url = "github:binaryphile/init.bash";
+      flake = false;
+    };
 
     #nixgl.url = "github:nix-community/nixGL";
   };
