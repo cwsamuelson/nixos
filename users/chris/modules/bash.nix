@@ -1,4 +1,4 @@
-{ pkgs, system, ... }: {
+{ pkgs, system, dotscripts, ... }: {
   programs.bash = {
     enable = true;
 
@@ -30,12 +30,12 @@
 
     # manual additions to bash_profile
     profileExtra = ''
-      source $HOME/init-bash/init.bash
+      source ${dotscripts}/bin/init.bash
     '';
 
     # manual additions to bashrc
     initExtra = ''
-      source $HOME/init-bash/init.bash
+      source ${dotscripts}/bin/init.bash
     '';
   };
 }

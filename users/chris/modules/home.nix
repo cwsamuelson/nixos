@@ -1,7 +1,20 @@
-{ pkgs, username, stateVersion, init-bash, ... }: {
+{ pkgs, username, stateVersion, init-bash, ... }:
+let
+  #emptyDir = pkgs.runCommand "empty-dir" {} ''
+  #  mkdir -p $out
+  #'';
+in
+{
   home = {
     homeDirectory = "/home/${username}";
     inherit username stateVersion;
+
+    file = {
+      #"init-bash/apps".source = emptyDir;
+
+      #".screenrc".source = ./screenrc;
+      ".inputrc".source = ../dotfiles/inputrc;
+    };
 
     sessionVariables = {
       CONAN_PASSWORD="demo";
