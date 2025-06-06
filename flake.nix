@@ -13,15 +13,10 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
 
-    init-bash = {
-      url = "github:binaryphile/init.bash";
-      flake = false;
-    };
-
     #nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, init-bash, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
       #users = [
@@ -60,7 +55,6 @@
 
         extraSpecialArgs = {
           inherit inputs stateVersion username system;
-          init-bash = inputs.init-bash;
         };
 
         modules = [

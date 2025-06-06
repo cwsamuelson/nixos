@@ -1,6 +1,6 @@
-{ pkgs, config, stateVersion, username, system, init-bash, ... }:
+{ pkgs, config, stateVersion, username, system, ... }:
 let
-  dotscripts = import ./dotfiles { inherit pkgs init-bash; };
+  dotscripts = import ./dotfiles { inherit pkgs; };
 in
 {
   imports = [

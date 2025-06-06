@@ -37,22 +37,6 @@
         "type": "github"
       }
     },
-    "init-bash": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1622482779,
-        "narHash": "sha256-WDpOgfOsJEvitGShzZmLOWc+OVY3JvIJDdV0VBbYODs=",
-        "owner": "binaryphile",
-        "repo": "init.bash",
-        "rev": "664cd8302c7882cb8f3d7d91c4c5ae68611030d0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "binaryphile",
-        "repo": "init.bash",
-        "type": "github"
-      }
-    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -107,7 +91,6 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "init-bash": "init-bash",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2"
       }

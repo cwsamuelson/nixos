@@ -1,18 +1,9 @@
-{ pkgs, username, stateVersion, init-bash, ... }:
-let
-  #emptyDir = pkgs.runCommand "empty-dir" {} ''
-  #  mkdir -p $out
-  #'';
-in
-{
+{ pkgs, username, stateVersion, ... }: {
   home = {
     homeDirectory = "/home/${username}";
     inherit username stateVersion;
 
     file = {
-      #"init-bash/apps".source = emptyDir;
-
-      #".screenrc".source = ./screenrc;
       ".inputrc".source = ../dotfiles/inputrc;
     };
 
