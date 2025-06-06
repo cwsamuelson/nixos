@@ -21,7 +21,7 @@ update_prompt() {
 
   if [[ $(command -v __git_ps1) ]]; then
     PS1_CMD1=$(__git_ps1 " (%s)")
-    PS1+="\[\e[38;5;247m\] ${PS1_CMD1}\[\e[0m\]"
+    PS1+="\[\e[38;5;247m\]${PS1_CMD1}\[\e[0m\]"
 
     if [ -n "$DIRENV_DIR" ]; then
       PS1+="% " # % for direnv directories
