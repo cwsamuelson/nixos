@@ -36,6 +36,7 @@ let
     installPhase = ''
       mkdir -p $out/bin
       mkdir -p $out/bin/settings
+      mkdir -p $out/bin/apps
 
       cp -r settings $out/bin
 
