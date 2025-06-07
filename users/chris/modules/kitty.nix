@@ -5,6 +5,7 @@
     shellIntegration = {
       enableZshIntegration = true;
       enableBashIntegration = true;
+      #enableNushellIntegration = true;
     };
 
     font = {

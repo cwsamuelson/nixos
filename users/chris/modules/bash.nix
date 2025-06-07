@@ -1,4 +1,6 @@
-{ pkgs, system, dotscripts, ... }: {
+{ pkgs, dotscripts, ... }: {
+  #home.shell.enableBashIntegration = true;
+
   programs.bash = {
     enable = true;
 

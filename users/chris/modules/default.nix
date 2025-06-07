@@ -12,10 +12,15 @@
     ./direnv.nix
     ./fzf.nix
     ./git.nix
+    ./gpg.nix
+    ./home-manager.nix
     ./home.nix
     ./kitty.nix
     ./neovim.nix
+    ./nix-your-shell.nix
+    ./nushell.nix
     ./vim.nix
     ./yazi.nix
+    ./zsh.nix
   ];
 }
