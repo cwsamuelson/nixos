@@ -1,14 +1,13 @@
-{ pkgs, username, hostname, ... }: {
+{ pkgs, user, host, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   fuzzing.enable = true;
   cntnr.enable = true;
   user = {
-    inherit username;
-    name = "Chris Samuelson";
+    inherit (user) username name;
   };
   networks = {
-    inherit hostname;
+    hostname = host.hostname;
     firewall.activeServices = [];
   };
 
@@ -77,16 +76,18 @@
 
     # Enable the OpenSSH daemon.
     # openssh.enable = true;
+
+    pulseaudio.enable = false;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
   };
 
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   environment.systemPackages = with pkgs; [
     vim

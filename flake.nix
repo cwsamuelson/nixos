@@ -18,31 +18,31 @@
   outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }@inputs:
   let
     system = "x86_64-linux";
-    #users = [
-    #  { username = "chris"; stateVersion = "25.05"; }
-    #];
-    username = "chris";
-    stateVersion = "25.05";
+    user = {
+      username = "chris";
+      name = "Chris Samuelson";
+      stateVersion = "25.05";
+    };
     hosts = [
       { hostname = "wsl"; stateVersion = "25.05"; }
       { hostname = "laptop-ava"; stateVersion = "25.05"; }
       { hostname = "laptop-fw"; stateVersion = "25.05"; }
     ];
 
-    makeSystem = { hostname, stateVersion, ... }: nixpkgs.lib.nixosSystem {
+    makeSystem = { host, ... }: nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit inputs stateVersion hostname username nixos-wsl;
+        inherit inputs host user nixos-wsl;
       };
 
       modules = [
         ./hosts/modules
         ./hosts/base
-        ./hosts/${hostname}/configuration.nix
+        ./hosts/${host.hostname}/configuration.nix
       ];
     };
 
-    makeHM = { username, stateVersion }:
+    makeHM = { user }:
     home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs {
         inherit system;
@@ -53,23 +53,23 @@
       };
 
       extraSpecialArgs = {
-        inherit inputs stateVersion username system;
+        inherit inputs user system;
       };
 
       modules = [
-        ./users/${username}/home.nix
+        ./users/${user.username}/home.nix
       ];
     };
   in {
     nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
       configs // {
         "${host.hostname}" = makeSystem {
-          inherit (host) hostname stateVersion;
+          inherit host;
         };
       }) {} hosts;
 
     homeConfigurations.chris = makeHM {
-      inherit username stateVersion;
+      inherit user;
     };
 
     #homeConfigurations = nixpkgs.lib.foldl' (configs: user:

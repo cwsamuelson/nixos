@@ -1,7 +1,8 @@
-{ pkgs, username, stateVersion, ... }: {
+{ pkgs, user, stateVersion, ... }: {
   home = {
-    homeDirectory = "/home/${username}";
-    inherit username stateVersion;
+    homeDirectory = "/home/${user.username}";
+    stateVersion = user.stateVersion;
+    username = user.username;
 
     file = {
       ".inputrc".source = ../dotfiles/inputrc;

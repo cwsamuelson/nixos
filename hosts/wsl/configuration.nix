@@ -1,4 +1,4 @@
-{ pkgs, username, nixos-wsl, ... }: {
+{ pkgs, user, nixos-wsl, ... }: {
   imports = [
     nixos-wsl.nixosModules.default
     # ??
@@ -8,7 +8,7 @@
   wsl = {
     enable = true;
     #nativeSystemd = 
-    defaultUser = username;
+    defaultUser = user.username;
     interop.includePath = true;
     wslConf = {
       boot.systemd = true;

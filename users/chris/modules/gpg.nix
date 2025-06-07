@@ -18,6 +18,7 @@
     enableZshIntegration = true;
     enableNushellIntegration = true;
 
+    # would like to setup gpg+ssh keys to have consistent, root identity keys
     #enableSshSupport = true;
     #sshKeys = [];
   };

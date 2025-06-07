@@ -1,4 +1,4 @@
-{ pkgs, config, stateVersion, username, system, ... }:
+{ pkgs, config, user, system, ... }:
 let
   dotscripts = import ./dotfiles { inherit pkgs; };
 in
@@ -9,6 +9,6 @@ in
   ];
 
   config._module.args = {
-    inherit username stateVersion dotscripts;
+    inherit user dotscripts;
   };
 }
