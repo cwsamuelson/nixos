@@ -1,14 +1,14 @@
-{ pkgs, hostname, ... }: {
+{ pkgs, username, hostname, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   fuzzing.enable = true;
   cntnr.enable = true;
   user = {
-    username = "chris";
+    inherit username;
     name = "Chris Samuelson";
   };
   networks = {
-    hostname = hostname;
+    inherit hostname;
     firewall.activeServices = [];
   };
 
