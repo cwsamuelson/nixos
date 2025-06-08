@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  programs.todoman = {
-    enable = true;
-  };
+  #programs.todoman = {
+  #  enable = true;
+  #};
 }
