@@ -57,6 +57,7 @@
       };
 
       modules = [
+        ./users/${user.username}/modules
         ./users/${user.username}/home.nix
       ];
     };

@@ -8,7 +8,6 @@
   };
 
   imports = [
-    ./bash.nix
     ./direnv.nix
     ./fzf.nix
     ./git.nix
@@ -18,11 +17,10 @@
     ./kitty.nix
     ./neovim.nix
     ./nix-your-shell.nix
-    ./nushell.nix
+    ./shells
     ./tmux.nix
     ./todoman.nix
     ./vim.nix
     ./yazi.nix
-    ./zsh.nix
   ];
 }

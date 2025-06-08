@@ -1,14 +1,5 @@
-{ pkgs, config, user, system, ... }:
-let
-  dotscripts = import ./dotfiles { inherit pkgs; };
-in
-{
-  imports = [
-    ./modules
-    ./packages.nix
-  ];
-
-  config._module.args = {
-    inherit user dotscripts;
-  };
+{ pkgs, user, ... }:
+  import ./packages.nix { inherit pkgs user; }
+// {
+  shells.enable = "bash";
 }
