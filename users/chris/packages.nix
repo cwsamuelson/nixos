@@ -1,28 +1,35 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    # UI
     firefox
     gitkraken
     jetbrains-toolbox
-    stdman
     obsidian
 
+    # dev
+    stdman
+    tre-command
+    devbox
+    copier
+
+    # utility
     curl
+    yq
+
     fd
+    most
+    hishtory
+    binsider
+
     # delta?
     # https://github.com/dandavison/delta
-    most
-    yq
-    hishtory
-    copier
-    binsider
+
     ## advanced watch
     # viddy
+
     ## tui baobab tools
     # wiper
     # dua
     # diskonaut
-    tre-command
- 
-    devbox
   ];
 }

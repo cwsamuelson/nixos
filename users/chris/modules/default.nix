@@ -19,6 +19,8 @@
     ./neovim.nix
     ./nix-your-shell.nix
     ./nushell.nix
+    ./tmux.nix
+    ./todoman.nix
     ./vim.nix
     ./yazi.nix
     ./zsh.nix

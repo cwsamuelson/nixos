@@ -10,6 +10,10 @@
     hostname = host.hostname;
     firewall.activeServices = [];
   };
+  desktopmanager.enable = "gnome";
+  displaymanager.enable = "gdm";
+  #desktopManager.gnome.enable = true;
+  #displayManager.gdm.enable = true;
 
   nix = {
     package = pkgs.nix;
@@ -58,8 +62,8 @@
       enable = true;
 
       # Enable the GNOME Desktop Environment.
-      desktopManager.gnome.enable = true;
-      displayManager.gdm.enable = true;
+      #desktopManager.gnome.enable = true;
+      #displayManager.gdm.enable = true;
 
       # Configure keymap in X11
       xkb = {

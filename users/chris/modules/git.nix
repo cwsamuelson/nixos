@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, user, ... }: {
   programs.git = {
     enable = true;
 
-    userName = "Chris Samuelson";
+    userName = user.name;
     userEmail = "chris.sam55@gmail.com";
 
     aliases = {
