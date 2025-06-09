@@ -7,7 +7,13 @@
   services.fwupd.enable = true;
   services.fprintd.enable = true;
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    loader = {
+      grub.enable = false;
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 }

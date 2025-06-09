@@ -11,7 +11,10 @@
     defaultUser = user.username;
     interop.includePath = true;
     wslConf = {
-      boot.systemd = true;
+      boot = {
+        systemd = true;
+        grub.enable = false;
+      };
       automount = {
         options = "metadata,uid=1000,gid=1000";
         root = "/mnt";
