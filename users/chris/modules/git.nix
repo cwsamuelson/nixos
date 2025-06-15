@@ -10,10 +10,11 @@
       co = "checkout";
       uncommit = "reset --soft HEAD^";
       discard = "reset HEAD --hard";
-      graph = "git log --graph --oneline --all";
 
-      # this diff-intent style makes commands discoverable by autocomplete, and more organized
-      # <command>-<intent>
+      # this <action>-<intent> style makes commands organized discoverable by tab-complete
+
+      log-graph = "log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'";
+
       diff-all = "!\"for name in $(git diff --name-only $1); do git difftool -y $1 $name & done\"";
       diff-changed = "diff --name-status -r";
       diff-stat = "diff --stat --ignore-space-change -r";
@@ -38,4 +39,8 @@
       grep.fullName = "true";
     };
   };
+
+  home.packages = with pkgs; [
+    tig
+  ];
 }
