@@ -15,6 +15,7 @@
 
     settings = {
       allow_remote_control = true;
+      scrollback_lines = -1;
     };
   };
 }

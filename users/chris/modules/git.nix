@@ -5,6 +5,8 @@
     userName = user.name;
     userEmail = "chris.sam55@gmail.com";
 
+    lfs.enable = true;
+
     aliases = {
       st = "status";
       co = "checkout";
