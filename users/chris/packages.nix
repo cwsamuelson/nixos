@@ -23,6 +23,7 @@
     binsider
     bc
     usbutils
+    nushell
 
     # delta?
     # https://github.com/dandavison/delta
