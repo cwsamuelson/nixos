@@ -4,6 +4,7 @@
     firefox
     gitkraken
     jetbrains-toolbox
+    icu # in support of CLion..
     obsidian
 
     # dev
@@ -20,6 +21,8 @@
     most
     hishtory
     binsider
+    bc
+    usbutils
 
     # delta?
     # https://github.com/dandavison/delta

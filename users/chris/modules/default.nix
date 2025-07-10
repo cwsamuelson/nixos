@@ -15,7 +15,7 @@
     ./home-manager.nix
     ./home.nix
     ./kitty.nix
-    ./neovim.nix
+    ./neovim
     ./nix-your-shell.nix
     ./shells
     ./tmux.nix
