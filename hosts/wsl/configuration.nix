@@ -13,7 +13,6 @@
     wslConf = {
       boot = {
         systemd = true;
-        grub.enable = false;
       };
       automount = {
         options = "metadata,uid=1000,gid=1000";
