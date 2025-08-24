@@ -1,0 +1,17 @@
+[user]
+    email = chris.sam55@gmail.com
+    name = Chris Samuelson
+[init]
+    defaultBranch = main
+[push]
+    default = main
+[core]
+    editor = vim
+[alias]
+    st = status
+[color]
+    diff = true
+[mailmap]
+    file = ~/.mailmap
+[log]
+    mailmap = true
