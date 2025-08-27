@@ -8,6 +8,7 @@
     lfs.enable = true;
 
     aliases = {
+      root = "rev-parse --show-toplevel";
       st = "status";
       co = "checkout";
       uncommit = "reset --soft HEAD^";

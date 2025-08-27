@@ -33,9 +33,8 @@
       ls = "ls -lhA --color=always";
       # -I skip binary files
       # -n include line numbers
-      # -r recursive
       # -i case insensitive
-      grep = "grep -Ini --color=always";
+      grep = "grep -Ini --color=always --exclude-dir={.git,.venv,.devbox,build,.obsidian,.conan,.conan2,.svn}";
       oops = "sudo $(history -p !!)";
       cat = "bat --wrap=never";
       dbr = "devbox run";

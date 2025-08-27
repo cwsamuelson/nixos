@@ -22,3 +22,11 @@ home-manager switch --flake .
 nix flake update
 sudo nixos-rebuild switch --flake .#laptop-fw
 ```
+
+## Update commands
+``` bash
+sudo nixos-rebuild switch --flake ~/projects/nixos
+```
+```bash
+home-manager switch --flake ~/projects/nixos/
+```

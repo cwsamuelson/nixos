@@ -3,6 +3,9 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter',
   },
+  completions = {
+    lsp = { enabled = true }
+  },
   -- dependencies = {
   --   'nvim-treesitter/nvim-treesitter',
   --   'echasnovski/mini.nvim', -- if you use the mini.nvim suite
