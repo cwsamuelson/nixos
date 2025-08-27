@@ -12,6 +12,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    services.xserver.displayManager.gdm.enable = true;
+    services.displayManager.gdm.enable = true;
   };
 }

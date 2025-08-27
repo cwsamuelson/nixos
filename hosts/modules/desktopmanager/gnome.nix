@@ -12,6 +12,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    services.xserver.desktopManager.gnome.enable = true;
+    services.desktopManager.gnome.enable = true;
   };
 }
