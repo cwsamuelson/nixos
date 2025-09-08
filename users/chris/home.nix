@@ -8,5 +8,6 @@
     lazydocker.enable = true;
     # HM manual says this exists, but it doesn't build
     #lazysql.enable = true;
+    ranger.enable = true;
   };
 }
