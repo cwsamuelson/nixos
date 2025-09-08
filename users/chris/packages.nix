@@ -11,6 +11,7 @@
     stdman
     tre-command
     devbox
+    devenv
     copier
 
     # utility
