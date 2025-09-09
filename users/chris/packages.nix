@@ -26,6 +26,10 @@
     usbutils
     nushell
 
+    # # https://git.zx2c4.com/ctmg/about/
+    # ctmg
+    # cryptsetup
+
     # delta?
     # https://github.com/dandavison/delta
 

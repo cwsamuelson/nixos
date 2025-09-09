@@ -44,6 +44,7 @@ in
         "checkwinsize"
         "extglob"
         "globstar"
+        "cdspell"
       ];
 
       # manual additions to bash_profile

@@ -3,13 +3,16 @@
     enable = true;
     homedir = "${config.xdg.dataHome}/gnupg";
 
-    # may want to change to true if it becomes an annoyance
-    mutableKeys = false;
+    mutableKeys = true;
     mutableTrust = false;
 
     #settings = {
     #};
   };
+
+  home.packages = with pkgs; [
+    pinentry
+  ];
 
   services.gpg-agent = {
     enable = true;
@@ -17,6 +20,10 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
     enableNushellIntegration = true;
+
+    pinentry = {
+      package = pkgs.pinentry;
+    };
 
     # would like to setup gpg+ssh keys to have consistent, root identity keys
     #enableSshSupport = true;
