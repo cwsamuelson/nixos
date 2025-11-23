@@ -8,7 +8,13 @@
   };
   networks = {
     hostname = host.hostname;
-    firewall.activeServices = [];
+    firewall = {
+      # enable = true;
+      activeServices = [
+        # "uxplay"
+        "localsend"
+      ];
+    };
   };
   desktopmanager.enable = "gnome";
   displaymanager.enable = "gdm";

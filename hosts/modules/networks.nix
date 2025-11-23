@@ -6,17 +6,22 @@ let
   servicePortMap = {
     localsend = {
       tcp = [ 53317 ];
-      udp = [];
+      udp = [ 53317 ];
+    };
+
+    uxplay = {
+      tcp = [ 7000 7001 ];
+      udp = [ 5353 ];
     };
   };
 
   tcpPorts = concatLists (map
     (s: servicePortMap.${s}.tcp)
-    cfg.activeServices
+    cfg.firewall.activeServices
   );
   udpPorts = concatLists (map
     (s: servicePortMap.${s}.udp)
-    cfg.activeServices
+    cfg.firewall.activeServices
   );
 in
 {
@@ -61,8 +66,8 @@ in
       firewall = mkIf cfg.firewall.enable {
         enable = true;
 
-        allowedTCPPorts = unique (openTCPPorts ++ tcpPorts);
-        allowedUDPPorts = unique (openUDPPorts ++ udpPorts);
+        allowedTCPPorts = unique (cfg.firewall.openTCPPorts ++ tcpPorts);
+        allowedUDPPorts = unique (cfg.firewall.openUDPPorts ++ udpPorts);
       };
     };
   };

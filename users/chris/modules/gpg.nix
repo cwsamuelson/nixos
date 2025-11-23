@@ -11,7 +11,7 @@
   };
 
   home.packages = with pkgs; [
-    pinentry
+    # pinentry
   ];
 
   services.gpg-agent = {
@@ -22,7 +22,7 @@
     enableNushellIntegration = true;
 
     pinentry = {
-      package = pkgs.pinentry;
+      package = pkgs.pinentry-curses;
     };
 
     # would like to setup gpg+ssh keys to have consistent, root identity keys

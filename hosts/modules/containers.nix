@@ -24,7 +24,7 @@ in
     virtualisation.${cfg.engine} = {
       enable = true;
       rootless = {
-        enable = true;
+        # enable = true;
         setSocketVariable = true;
       };
     };
