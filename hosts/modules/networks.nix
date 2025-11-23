@@ -3,24 +3,46 @@ with lib;
 let
   cfg = config.networks;
 
-  servicePortMap = {
+  serviceAttributes = {
     localsend = {
       tcp = [ 53317 ];
       udp = [ 53317 ];
+      packages = with pkgs; [
+        localsend_app
+      ];
     };
 
     uxplay = {
-      tcp = [ 7000 7001 ];
-      udp = [ 5353 ];
+      tcp = [
+        7000
+        7001
+        7011
+      ];
+      udp = [
+        5353
+        6000
+        6001
+        6011
+      ];
+      packages = with pkgs; [
+        uxplay
+        avahi-compat
+        gst_all_1.gstreamer
+        gnomeExtensions.uxplay-control
+      ];
     };
   };
 
   tcpPorts = concatLists (map
-    (s: servicePortMap.${s}.tcp)
+    (s: serviceAttributes.${s}.tcp)
     cfg.firewall.activeServices
   );
   udpPorts = concatLists (map
-    (s: servicePortMap.${s}.udp)
+    (s: serviceAttributes.${s}.udp)
+    cfg.firewall.activeServices
+  );
+  addlPackages = concatLists (map
+    (s: serviceAttributes.${s}.packages)
     cfg.firewall.activeServices
   );
 in
@@ -49,7 +71,7 @@ in
 
       activeServices = mkOption {
         type = types.listOf (types.enum
-          (attrNames servicePortMap)
+          (attrNames serviceAttributes)
         );
 
         description = "";
@@ -70,5 +92,22 @@ in
         allowedUDPPorts = unique (cfg.firewall.openUDPPorts ++ udpPorts);
       };
     };
+
+    services = {
+      avahi = {
+        enable = builtins.elem "uxplay" cfg.firewall.activeServices;
+        nssmdns = true;
+
+        publish = {
+          enable = true;
+          userServices = true;
+          addresses = true;
+        };
+
+        openFirewall = true; 
+      };
+    };
+
+    environment.systemPackages = addlPackages;
   };
 }

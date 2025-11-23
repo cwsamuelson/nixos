@@ -6,16 +6,18 @@
   user = {
     inherit (user) username name;
   };
+
   networks = {
     hostname = host.hostname;
     firewall = {
-      # enable = true;
+      enable = true;
       activeServices = [
         # "uxplay"
-        "localsend"
+        # "localsend"
       ];
     };
   };
+
   desktopmanager.enable = "gnome";
   displaymanager.enable = "gdm";
   #desktopManager.gnome.enable = true;
