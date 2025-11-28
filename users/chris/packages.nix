@@ -26,6 +26,8 @@
     usbutils
     nushell
 
+    structurizr-cli
+
     # # https://git.zx2c4.com/ctmg/about/
     # ctmg
     # cryptsetup
