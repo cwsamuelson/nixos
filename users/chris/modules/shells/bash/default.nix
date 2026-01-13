@@ -15,8 +15,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    #home.shell.enableBashIntegration = true;
-
     programs.bash = {
       enable = true;
 

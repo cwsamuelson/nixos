@@ -13,8 +13,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    #home.shell.enableNushellIntegration = true;
-
     programs.nushell = {
       enable = true;
     };

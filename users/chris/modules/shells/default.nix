@@ -11,6 +11,13 @@ in
     ./zsh.nix
   ];
 
+  config.home = {
+    shell.enableShellIntegration = true;
+    sessionVariables = {
+      CDPATH = "$HOME/projects/:$HOME/repos";
+    };
+  };
+
   options.${prop} = {
     #!@TODO enable vs default
     enable = mkOption {

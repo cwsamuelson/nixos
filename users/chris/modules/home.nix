@@ -25,6 +25,7 @@
       # search as array:
       # name = "find \"${array[@]}\" -iname "$file"
 
+      # When stand-alone, may want to run as `switch-home --extra-experimental-features 'nix-command flakes'`
       switch-home = "home-manager switch --flake ~/projects/nixos";
       switch-os = "nixos-rebuild switch --flake ~/projects/nixos";
       # -l list vertically, with add metadata

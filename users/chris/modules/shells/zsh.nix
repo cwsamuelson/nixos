@@ -13,8 +13,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    #home.shell.enableZshIntegration = true;
-
     programs.zsh = {
       enable = true;
 
@@ -28,11 +26,11 @@ in
       #plugins.*...
 
       autocd = true;
-      #cdpath = [
-      #  "projects"
-      #  "repos"
+      cdpath = [
+        "projects"
+        "repos"
       #  "wrappers"
-      #];
+      ];
 
       #autoSuggestions = {
       #};
