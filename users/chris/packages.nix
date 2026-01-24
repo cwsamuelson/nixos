@@ -28,17 +28,36 @@
 
     structurizr-cli
 
+    # # proton?
+    # proton-pass
+    # protonvpn-gui
+    # protonmail-bridge
+    # protonmail-desktop
+    # proton-authenticator
+
+    # yubico-PAM
+    # yubikey-agent
+    # yubikey-manager
+    # libyubikey
+    # libykclient
+
+    # # https://secretspec.dev/
+    # # https://devenv.sh/integrations/secretspec/#configuration-optional
+    # lastpass-cli
+    # secretspec
+    # pass
+
     # # https://git.zx2c4.com/ctmg/about/
     # ctmg
     # cryptsetup
 
-    # delta?
     # https://github.com/dandavison/delta
+    # delta?
 
-    ## advanced watch
+    # # advanced watch
     # viddy
 
-    ## tui baobab tools
+    # # tui baobab tools
     # wiper
     # dua
     # diskonaut

@@ -16,6 +16,8 @@
     settings = {
       allow_remote_control = true;
       scrollback_lines = -1;
+      hide_window_decorations = true;
+      tab_bar_style = "powerline";
     };
   };
 }

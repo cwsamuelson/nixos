@@ -96,7 +96,7 @@ in
     services = {
       avahi = {
         enable = builtins.elem "uxplay" cfg.firewall.activeServices;
-        nssmdns = true;
+        nssmdns4 = true;
 
         publish = {
           enable = true;
