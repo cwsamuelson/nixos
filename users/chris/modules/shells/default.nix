@@ -14,7 +14,7 @@ in
   config.home = {
     shell.enableShellIntegration = true;
     sessionVariables = {
-      CDPATH = "$HOME/projects/:$HOME/repos";
+      CDPATH = ".:$HOME/projects/:$HOME/repos";
     };
   };
 
