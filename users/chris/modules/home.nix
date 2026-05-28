@@ -28,10 +28,17 @@
       # When stand-alone, may want to run as `switch-home --extra-experimental-features 'nix-command flakes'`
       switch-home = "home-manager switch --flake ~/projects/nixos";
       switch-os = "nixos-rebuild switch --flake ~/projects/nixos";
+
+      # This is hypothetical, for now..
+      # clean-nix = "nix-env --list-generations";
+      # clean-nix = "nix-collect-garbage --delete-old";
+      # clean-nix = "nix-collect-garbage --delete-old";
+
       # -l list vertically, with add metadata
       # -h human readable file sizes
       # -A 'all', but excluding '.' and '..'
       ls = "ls -lhA --color=always";
+
       # -I skip binary files
       # -n include line numbers
       # -i case insensitive
