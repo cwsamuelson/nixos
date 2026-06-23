@@ -2,7 +2,7 @@
 
 # path pretty prints the path
 alias path='echo "${PATH//:/$'\n'}"'
-alias attach='tmux attach'
+# alias attach='tmux attach'
 alias gdb='gdb -q'
 
 # psaux is ps aux if it searched for process names

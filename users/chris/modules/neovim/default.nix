@@ -9,7 +9,7 @@
 
     withNodeJs = true;
     withPython3 = true;
-    #withRuby = true;
+    withRuby = false;
 
   };
 

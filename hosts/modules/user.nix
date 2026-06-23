@@ -45,6 +45,7 @@ in
         "networkmanager"
         "wheel"
         "docker"
+        "dialout"
       ] ++ cfg.groups;
       packages = with pkgs; [
         home-manager
