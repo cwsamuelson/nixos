@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+prompt_yes_no() {
+  while true; do
+    read -p ${1:-"Do you want to continue?"} "(Y/n)" yn
+
+    yn=${yn:-Y}
+
+    case $yn in
+      [Yy]*) return 0;;
+      [Nn]*) return 1;;
+      \n*) return 0;;
+      *) echo "\"$yn\", invalid response." ;;
+    esac
+  done
+}
+
+EDITOR=${EDITOR:-"nvim -p"}
+command -v $EDITOR &>/dev/null || EDITOR="nvim -p" \
+  || command -v $EDITOR &>/dev/null || EDITOR=vim \
+  || command -v $EDITOR &>/dev/null || EDITOR=vi \
+  || command -v $EDITOR &>/dev/null || EDITOR=emacs \
+  || command -v $EDITOR &>/dev/null || EDITOR=nano \
+  || command -v $EDITOR &>/dev/null || EDITOR=pico
+
+if [[ -z "$EDITOR" ]] || ! command -v $EDITOR &>/dev/null; then
+  echo "Could not find an editor.  Tried:" >&2
+  echo "\t- \$EDITOR environment" >&2
+  echo "\t- nvim" >&2
+  echo "\t- vim" >&2
+  echo "\t- vi" >&2
+  echo "\t- emacs" >&2
+  echo "\t- nano" >&2
+  echo "\t- pico" >&2
+  exit 1
+fi
+
+if [[ $# -eq 1 && ! "$1" =~ ^- && ! -f "$1" ]]; then
+  base="${1##*/}"
+  files=( $(find . -maxdepth 5 -type f \( -path "*/header/${base}.*" -o -path "*/source/${base}.*" \) ) )
+
+  if [[ ${#files[@]} -gt 0 ]]; then
+    exec $EDITOR "${files[@]}"
+  fi
+fi
+
+echo "No files found"
+
+if prompt_yes_no "Create files named: ?" $@; then
+  exec $EDITOR $@
+fi

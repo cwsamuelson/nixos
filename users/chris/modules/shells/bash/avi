@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+collect() {
+  name=$1
+  if [[ ${#name} -le 2 ]]; then
+    echo "Target name($name) is rather short; it may match more names than expected." >&2
+  fi
+
+  find -iname "*$name*"
+}
+
+args=()
+for arg in $@; do
+  args+=( $(collect $arg) )
+done
+
+if [[ ${args[@]} -gt 5 ]]; then
+  echo "Query matched ${#args[@]} items.  Perhaps a more narrow query would be helpful." >&2
+fi
+
+exec vi -p "${args[@]}"
