@@ -21,13 +21,13 @@
     user = {
       username = "chris";
       name = "Chris Samuelson";
-      stateVersion = "25.11";
+      stateVersion = "26.05";
       groups = [ "dialout" ];
     };
     hosts = [
-      { hostname = "wsl"; stateVersion = "25.11"; }
-      { hostname = "laptop-ava"; stateVersion = "25.11"; }
-      { hostname = "laptop-fw"; stateVersion = "25.11"; }
+      { hostname = "wsl"; stateVersion = "26.11"; }
+      { hostname = "laptop-ava"; stateVersion = "26.11"; }
+      { hostname = "laptop-fw"; stateVersion = "26.11"; }
     ];
 
     makeSystem = { host, ... }: nixpkgs.lib.nixosSystem {

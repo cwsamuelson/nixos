@@ -45,3 +45,17 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end
 })
+
+-- Shortcut key
+vim.keymap.set('c', 'trivy', function()
+    local cmdtype = vim.fn.getcmdtype()
+    -- Only expand if currently using the forward or backward search prompt
+    if cmdtype == '/' or cmdtype == '?' then
+        return [[\v(HIGH|CRITICAL): [1-9]\d*]]
+    end
+    -- Otherwise, output 'trivy' normally
+    return 'trivy'
+end, {
+    expr = true,
+    desc = 'Expand trivy to regex in search line'
+})

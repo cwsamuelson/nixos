@@ -32,7 +32,6 @@
       # This is hypothetical, for now..
       # clean-nix = "nix-env --list-generations";
       # clean-nix = "nix-collect-garbage --delete-old";
-      # clean-nix = "nix-collect-garbage --delete-old";
 
       # -l list vertically, with add metadata
       # -h human readable file sizes

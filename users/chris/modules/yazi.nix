@@ -5,11 +5,6 @@
     enableZshIntegration = true;
     enableNushellIntegration = true;
 
-    #plugins = {};
-    #flavors = {};# preferred over themes
-    #theme = {};
-    #keymap = {};
-
     settings = {
       manager = {
         sort_sensitive = false;
