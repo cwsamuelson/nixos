@@ -6,7 +6,7 @@ collect() {
     echo "Target name($name) is rather short; it may match more names than expected." >&2
   fi
 
-  find -iname "*$name*"
+  find -iname "*$name*" ! -path */build/* ! -path */cmake-build-*/*
 }
 
 args=()

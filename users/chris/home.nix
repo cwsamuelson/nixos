@@ -4,7 +4,13 @@
   shells.enable = "bash";
 
   programs = {
-    lazygit.enable = true;
+    home-manager.enable = true;
+    bat.enable = true;
+    btop.enable = true;
+    jq.enable = true;
+    ripgrep.enable = true;
+    difftastic.enable = true;
+
     lazydocker.enable = true;
     # HM manual says this exists, but it doesn't build
     lazysql.enable = true;

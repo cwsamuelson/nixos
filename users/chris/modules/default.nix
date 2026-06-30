@@ -1,12 +1,4 @@
 {
-  programs = {
-    home-manager.enable = true;
-    bat.enable = true;
-    btop.enable = true;
-    jq.enable = true;
-    ripgrep.enable = true;
-  };
-
   imports = [
     ./direnv.nix
     ./fzf.nix

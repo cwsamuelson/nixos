@@ -38,6 +38,8 @@
       # -A 'all', but excluding '.' and '..'
       ls = "ls -lhA --color=always";
 
+      diff = "difft";
+
       # -I skip binary files
       # -n include line numbers
       # -i case insensitive

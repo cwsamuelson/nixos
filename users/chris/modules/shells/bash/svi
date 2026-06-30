@@ -37,7 +37,7 @@ fi
 
 if [[ $# -eq 1 && ! "$1" =~ ^- && ! -f "$1" ]]; then
   base="${1##*/}"
-  files=( $(find . -maxdepth 5 -type f \( -path "*/header/${base}.*" -o -path "*/source/${base}.*" \) ) )
+  files=( $(find . -maxdepth 5 -type f \( -path "*/header/${base}.*" -o -path "*/header/*/${base}.*" -o -path "*/source/${base}.*" \) ) )
 
   if [[ ${#files[@]} -gt 0 ]]; then
     exec $EDITOR "${files[@]}"

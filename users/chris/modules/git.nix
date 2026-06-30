@@ -43,13 +43,20 @@
 
     difftastic = {
       enable = true;
-      git.enable = true;
+
+      git = {
+        enable = true;
+        diffToolMode = true;
+      };
+
       options = {
         background = "dark";
         color = "auto";
         display = "side-by-side";
       };
     };
+
+    lazygit.enable = true;
   };
 
   home.packages = with pkgs; [
