@@ -40,7 +40,7 @@
 
     graphics = {
       extraPackages = [
-        pkgs.mesa.drivers
+        pkgs.mesa
       ];
 
       enable = true;

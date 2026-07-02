@@ -1,5 +1,8 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    age
+    age-plugin-yubikey
+
     # UI
     firefox
     gitkraken

@@ -1,11 +1,8 @@
-{ pkgs, user, host, ... }: {
+{ config, pkgs, user, host, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   fuzzing.enable = true;
   cntnr.enable = true;
-  user = {
-    inherit (user) username name;
-  };
 
   networks = {
     hostname = host.hostname;
@@ -31,8 +28,7 @@
         "flakes"
       ];
       trusted-users = [
-        "root"
-        "chris"
+        config.user.username
       ];
     };
   };

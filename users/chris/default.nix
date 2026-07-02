@@ -1,11 +1,34 @@
-{ pkgs, user, stateVersion, ... }: {
-  home = {
-    homeDirectory = "/home/${user.username}";
-    stateVersion = user.stateVersion;
-    username = user.username;
+{ pkgs, user, ... }:
+  import ./packages.nix { inherit pkgs; }
+// {
+  programs = {
+    home-manager.enable = true;
+    bat.enable = true;
+    btop.enable = true;
+    jq.enable = true;
+    ripgrep.enable = true;
+    difftastic.enable = true;
 
+    lazydocker.enable = true;
+    # HM manual says this exists, but it doesn't build
+    lazysql.enable = true;
+    ranger.enable = true;
+    password-store.enable = true;
+  };
+
+  shells.enable = "bash";
+  direnv.enable = true;
+  fzf.enable = true;
+  git.enable = true;
+  gpg.enable = true;
+  kitty.enable = true;
+  mail.enable = true;
+  nys.enable = false;
+  yazi.enable = false;
+
+  home = {
     file = {
-      ".inputrc".source = ../dotfiles/inputrc;
+      ".inputrc".source = ./dotfiles/inputrc;
     };
 
     sessionVariables = {
@@ -13,7 +36,7 @@
       CONAN_LOGIN_USERNAME="demo";
       DIRENV_LOG_FORMAT="";
     };
-   
+
     # color=always can cause problems sometimes :(
     # piping to commands and files will include the command characters
     # my usage of these commands doesn't typically run into that problem

@@ -1,13 +1,14 @@
 { pkgs, ... }:
+with pkgs;
 let
-  init-bash = pkgs.fetchFromGitHub {
+  init-bash = fetchFromGitHub {
     owner = "binaryphile";
     repo = "init.bash";
     rev = "664cd8302c7882cb8f3d7d91c4c5ae68611030d0";
     sha256 = "sha256-WDpOgfOsJEvitGShzZmLOWc+OVY3JvIJDdV0VBbYODs=";
   };
 
-  init-bash-scripts = pkgs.stdenv.mkDerivation {
+  init-bash-scripts = stdenv.mkDerivation {
     name = "init-bash-scripts";
     src = init-bash;
 
@@ -29,7 +30,7 @@ let
     '';
   };
 
-  test-script = pkgs.stdenv.mkDerivation {
+  test-script = stdenv.mkDerivation {
     name = "test-script";
     src = ./.;
 
@@ -44,7 +45,7 @@ let
     '';
   };
 in
-pkgs.runCommand "home-scripts" {} ''
+runCommand "home-scripts" {} ''
   mkdir -p $out/bin/apps
   mkdir -p $out/bin/bin
   mkdir -p $out/bin/lib

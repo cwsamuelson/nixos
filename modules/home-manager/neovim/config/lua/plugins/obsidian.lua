@@ -14,8 +14,6 @@ return {
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
-
-    -- see below for full list of optional dependencies 👇
   },
   opts = {
     workspaces = {
@@ -24,6 +22,5 @@ return {
         path = "/mnt/c/Users/csamuelson/docs/obsidian/Default/",
       },
     },
-    -- see below for full list of options 👇
   },
 }

@@ -7,6 +7,7 @@
     ./home-manager.nix
     ./home.nix
     ./kitty.nix
+    ./mail.nix
     ./neovim
     ./nix-your-shell.nix
     ./shells
