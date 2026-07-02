@@ -1,6 +1,8 @@
 { pkgs, user, ... }:
-  import ./packages.nix { inherit pkgs; }
-// {
+let
+  packagesModule = import ./packages.nix { inherit pkgs; };
+in
+packagesModule // {
   programs = {
     home-manager.enable = true;
     bat.enable = true;
@@ -26,7 +28,7 @@
   nys.enable = false;
   yazi.enable = false;
 
-  home = {
+  home = packagesModule.home // {
     file = {
       ".inputrc".source = ./dotfiles/inputrc;
     };
@@ -58,7 +60,7 @@
 
       # -l list vertically, with add metadata
       # -h human readable file sizes
-      # -A 'all', but excluding '.' and '..'
+      # -A 'all', but excluding '.' and '.''
       ls = "ls -lhA --color=always";
 
       diff = "difft";
