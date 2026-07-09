@@ -7,7 +7,7 @@
 
   wsl = {
     enable = true;
-    #nativeSystemd = 
+    #nativeSystemd =
     defaultUser = user.username;
     interop.includePath = true;
     wslConf = {

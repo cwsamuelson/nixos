@@ -12,6 +12,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    services.xserver.desktopManager.plasma5.enable = true;
+    services.xserver.desktopManager.${name}.enable = true;
   };
 }

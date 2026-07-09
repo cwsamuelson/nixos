@@ -12,6 +12,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    services.displayManager.gdm.enable = true;
+    services.displayManager.${name}.enable = true;
   };
 }

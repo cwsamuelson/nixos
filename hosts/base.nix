@@ -1,4 +1,4 @@
-{ config, pkgs, user, host, ... }: {
+{ config, lib, pkgs, host, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   fuzzing.enable = true;
@@ -14,11 +14,6 @@
       ];
     };
   };
-
-  desktopmanager.enable = "gnome";
-  displaymanager.enable = "gdm";
-  #desktopManager.gnome.enable = true;
-  #displayManager.gdm.enable = true;
 
   nix = {
     package = pkgs.nix;
@@ -56,22 +51,9 @@
     };
   };
 
-  # Workaround for GNOME autologin:
-  #   https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd = {
-    services = {
-      "getty@tty1".enable = false;
-      "autovt@tty1".enable = false;
-    };
-  };
-
   services = {
     xserver = {
       enable = true;
-
-      # Enable the GNOME Desktop Environment.
-      #desktopManager.gnome.enable = true;
-      #displayManager.gdm.enable = true;
 
       # Configure keymap in X11
       xkb = {

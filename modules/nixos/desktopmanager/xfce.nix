@@ -12,6 +12,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    services.xserver.desktopManager.xfce.enable = true;
+    services.xserver.desktopManager.${name}.enable = true;
   };
 }

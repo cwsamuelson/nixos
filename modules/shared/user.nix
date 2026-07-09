@@ -11,6 +11,12 @@ in
       description = "User's given name.";
     };
 
+    email = mkOption {
+      type = types.str;
+      default = user.email or "";
+      description = "User's email address.";
+    };
+
     username = mkOption {
       type = types.str;
       default = toLower (head (splitString " " cfg.name));
@@ -19,7 +25,7 @@ in
 
     groups = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = user.groups or [];
       description = "";
     };
 

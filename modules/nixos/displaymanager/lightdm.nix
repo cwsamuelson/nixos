@@ -12,6 +12,6 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    services.xserver.displayManager.lightdm.enable = true;
+    services.xserver.displayManager.${name}.enable = true;
   };
 }

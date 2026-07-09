@@ -1,9 +1,16 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, user, ... }:
 let
   cfg = config.user;
+  # Only enable autologin if a desktop manager is actually configured
+  hasDesktopManager = config.desktopmanager.enable != null;
 in
 {
   config = {
+    # Set user config from specialArgs
+    user = {
+      inherit (user) name email groups;
+    };
+
     users = {
       users.${cfg.username} = {
         isNormalUser = true;
@@ -21,7 +28,7 @@ in
       };
     };
 
-    services.displayManager.autoLogin = {
+    services.displayManager.autoLogin = lib.mkIf hasDesktopManager {
       enable = true;
       user = cfg.username;
     };
