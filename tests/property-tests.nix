@@ -6,7 +6,7 @@ with lib;
 {
   # NixOS Configuration Property Tests
 
-  # Test that firewall is enabled on all systems
+  #  firewall is enabled on all systems
   testFirewallEnabled =
     let
       allConfigs = attrNames nixosConfigurations;
@@ -15,7 +15,7 @@ with lib;
     in
     all checkFirewall allConfigs;
 
-  # Test that NetworkManager is enabled on all systems
+  #  NetworkManager is enabled on all systems
   testNetworkManagerEnabled =
     let
       allConfigs = attrNames nixosConfigurations;
@@ -24,7 +24,7 @@ with lib;
     in
     all checkNM allConfigs;
 
-  # Test that nix flakes are enabled on all systems
+  #  nix flakes are enabled on all systems
   testNixFlakesEnabled =
     let
       allConfigs = attrNames nixosConfigurations;
@@ -36,7 +36,7 @@ with lib;
     in
     all checkFlakes allConfigs;
 
-  # Test that pip is enabled on all systems
+  #  pip is enabled on all systems
   testPipewireEnabled =
     let
       allConfigs = attrNames nixosConfigurations;
@@ -45,7 +45,7 @@ with lib;
     in
     all checkPipewire allConfigs;
 
-  # Test that pulseaudio is disabled (we use pipewire)
+  #  pulseaudio is disabled (we use pipewire)
   testPulseaudioDisabled =
     let
       allConfigs = attrNames nixosConfigurations;
@@ -56,7 +56,7 @@ with lib;
 
   # Home Manager Configuration Property Tests
 
-  # Test that neovim is enabled in home manager
+  #  neovim is enabled in home manager
   testNeovimEnabled =
     let
       allConfigs = attrNames homeConfigurations;
@@ -65,7 +65,7 @@ with lib;
     in
     all checkNeovim allConfigs;
 
-  # Test that neovim is set as default editor
+  #  neovim is set as default editor
   testNeovimDefaultEditor =
     let
       allConfigs = attrNames homeConfigurations;
@@ -74,7 +74,7 @@ with lib;
     in
     all checkDefaultEditor allConfigs;
 
-  # Test that bash is enabled (chris uses bash)
+  # bash is enabled
   testBashEnabled =
     let
       checkBash = name:
@@ -82,7 +82,7 @@ with lib;
     in
     checkBash "chris";
 
-  # Test that git is enabled
+  # git is enabled
   testGitEnabled =
     let
       allConfigs = attrNames homeConfigurations;
@@ -91,7 +91,7 @@ with lib;
     in
     all checkGit allConfigs;
 
-  # Test that critical programs are enabled for chris
+  #  critical programs are enabled for chris
   testChrisCriticalPrograms =
     let
       config = homeConfigurations.chris.config;
@@ -106,7 +106,7 @@ with lib;
     in
     all checkProgram criticalPrograms;
 
-  # Test that firefox is in home packages for chris
+  #  firefox is in home packages for chris
   testChrisHasFirefox =
     let
       packages = homeConfigurations.chris.config.home.packages;
@@ -114,7 +114,7 @@ with lib;
     in
     hasFirefox;
 
-  # Test that essential CLI tools are available for chris
+  #  essential CLI tools are available for chris
   testChrisEssentialCLI =
     let
       packages = homeConfigurations.chris.config.home.packages;
@@ -124,7 +124,7 @@ with lib;
     in
     all hasTool essentialTools;
 
-  # Test that home-manager itself is enabled
+  #  home-manager itself is enabled
   testHomeManagerEnabled =
     let
       allConfigs = attrNames homeConfigurations;
@@ -151,7 +151,7 @@ with lib;
     in
     all checkNoDesktop wslConfigs;
 
-  # Test that keyboard layout is set to dvorak variant
+  #  keyboard layout is set to dvorak
   testDvorakLayout =
     let
       xserverConfigs = filter (name:

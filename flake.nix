@@ -61,15 +61,45 @@
       ];
     };
 
-    # Generate all user×host combinations
+    # Define which users belong to which host
     nixosConfigurations =
       let
-        pairs = flatten (mapAttrsToList (hostname: host_config:
-          mapAttrsToList (username: user_config: {
+        availableUsers = attrNames user_configs;
+        availableHosts = attrNames host_configs;
+
+        hostUsers = {
+          wsl = [ "chris" ];
+          laptop-ava = [ "chris" ];
+          laptop-fw = [ "chris" ];
+        };
+
+        # Validate all referenced users and hosts exist
+        validateUsers = hostname: usernames:
+          let
+            invalid = filter (u: !(elem u availableUsers)) usernames;
+          in
+          if invalid != []
+          then throw "Host '${hostname}' references non-existent users: ${toString invalid}"
+          else usernames;
+
+        validateHosts =
+          let
+            referencedHosts = attrNames hostUsers;
+            invalid = filter (h: !(elem h availableHosts)) referencedHosts;
+          in
+          if invalid != []
+          then throw "hostUsers references non-existent hosts: ${toString invalid}"
+          else hostUsers;
+
+        # Generate configurations for specified host-user pairs
+        pairs = flatten (mapAttrsToList (hostname: usernames:
+          map (username: {
             name = "${hostname}-${username}";
-            value = makeSystem hostname username host_config user_config;
-          }) user_configs
-        ) host_configs);
+            value = makeSystem hostname username
+                      host_configs.${hostname}
+                      user_configs.${username};
+          }) (validateUsers hostname usernames)
+        ) (validateHosts));
       in
       listToAttrs pairs;
 

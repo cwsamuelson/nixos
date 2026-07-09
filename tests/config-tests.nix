@@ -78,17 +78,17 @@ with lib;
     in
     length actualHomeConfigs > 0;
 
-  # Hard-coded test: wsl-chris configuration must exist
-  testWslChrisExists = hasAttr "wsl-chris" nixosConfigurations;
+  # Hard-coded test: wsl configuration must exist
+  testWslExists = hasAttr "wsl" nixosConfigurations;
 
-  # Hard-coded test: laptop-fw-chris configuration must exist
-  testLaptopFwChrisExists = hasAttr "laptop-fw-chris" nixosConfigurations;
+  # Hard-coded test: laptop-fw configuration must exist
+  testLaptopFwExists = hasAttr "laptop-fw" nixosConfigurations;
 
-  # Hard-coded test: laptop-ava-chris configuration must exist
-  testLaptopAvaChrisExists = hasAttr "laptop-ava-chris" nixosConfigurations;
+  # Hard-coded test: laptop-ava configuration must exist
+  testLaptopAvaExists = hasAttr "laptop-ava" nixosConfigurations;
 
   # Hard-coded test: chris homeConfiguration must exist
-  testChrisHomeExists = hasAttr "chris" homeConfigurations;
+  testHomeExists = hasAttr "chris" homeConfigurations;
 
   # Test that we have at least 3 nixos configurations (guard against empty state)
   testMinimumNixosConfigurations =
