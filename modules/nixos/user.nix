@@ -1,36 +1,43 @@
-{ config, lib, pkgs, user, ... }:
+{ config, lib, pkgs, users, ... }:
 let
-  cfg = config.user;
-  # Only enable autologin if a desktop manager is actually configured
+  # Only enable autologin if a desktop manager is configured and there's exactly one user
   hasDesktopManager = config.desktopmanager.enable != null;
+  hasSingleUser = (builtins.length users) == 1;
+  firstUser = if hasSingleUser then (builtins.head users) else null;
 in
 {
   config = {
-    # Set user config from specialArgs
-    user = {
-      inherit (user) name email groups;
-    };
-
     users = {
-      users.${cfg.username} = {
-        isNormalUser = true;
-        uid = cfg.uid;
-        #primaryGroup = "chris";
-        description = cfg.name;
-        extraGroups = cfg.groups;
-        packages = with pkgs; [
-          home-manager
-        ];
-      };
+      users =
+        let
+          pairs = map (user: {
+            name = user.username;
+            value = {
+              isNormalUser = true;
+              inherit (user) uid;
+              description = user.name;
+              extraGroups = user.groups;
+              packages = with pkgs; [
+                home-manager
+              ];
+            };
+          }) users;
+        in
+        builtins.listToAttrs pairs;
 
-      groups.${cfg.username} = {
-        gid = cfg.gid;
-      };
+      groups =
+        let
+          pairs = map (user: {
+            name = user.username;
+            value.gid = user.gid;
+          }) users;
+        in
+        builtins.listToAttrs pairs;
     };
 
-    services.displayManager.autoLogin = lib.mkIf hasDesktopManager {
+    services.displayManager.autoLogin = lib.mkIf (hasDesktopManager && hasSingleUser) {
       enable = true;
-      user = cfg.username;
+      user = firstUser.username;
     };
   };
 }

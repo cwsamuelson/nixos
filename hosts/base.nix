@@ -1,4 +1,4 @@
-{ config, lib, pkgs, host, ... }: {
+{ config, lib, pkgs, host, users, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   fuzzing.enable = true;
@@ -22,9 +22,7 @@
         "nix-command"
         "flakes"
       ];
-      trusted-users = [
-        config.user.username
-      ];
+      trusted-users = map (user: user.username) users;
     };
   };
 

@@ -31,26 +31,53 @@
 
     # Re-organizing based on:
     # https://github.com/Ev-Mu/home-manager
-    makeSystem = hostname: username: host_config: user_config:
+    makeSystem = hostname: host_config: user_configs: hostUsernames:
     let
       host = {
         inherit hostname;
       };
 
-      user = {
-        inherit (user_config)
+      # Filter user configs to only those assigned to this host
+      filteredUserConfigs = filterAttrs (username: _: elem username hostUsernames) user_configs;
+
+      # Convert to list and add uid/gid fields
+      userListRaw = attrValues (mapAttrs (id: config: {
+        inherit (config)
           name
           email
           groups
         ;
-        username = toLower (head (splitString " " user_config.name));
-      };
+        username = toLower (head (splitString " " (config.name or id)));
+        uid = config.uid or null;
+        gid = config.gid or null;
+      }) filteredUserConfigs);
+
+      # Auto-assign uid/gid for users that don't specify them
+      users =
+        let
+          assignIds = list:
+            let
+              folder = acc: user:
+                let
+                  userWithIds = user // {
+                    uid = if user.uid != null then user.uid else acc.nextUid;
+                    gid = if user.gid != null then user.gid else acc.nextGid;
+                  };
+                in {
+                  result = acc.result ++ [ userWithIds ];
+                  nextUid = if user.uid != null then acc.nextUid else acc.nextUid + 1;
+                  nextGid = if user.gid != null then acc.nextGid else acc.nextGid + 1;
+                };
+              folded = foldl' folder { result = []; nextUid = 1000; nextGid = 1000; } list;
+            in folded.result;
+        in
+        assignIds userListRaw;
     in
     nixosSystem {
       inherit system;
 
       specialArgs = {
-        inherit inputs host user nixos-wsl;
+        inherit inputs host users nixos-wsl;
       };
 
       modules = [
@@ -91,15 +118,18 @@
             then throw "hostUsers references non-existent hosts: ${toString invalid}"
           else hostUsers;
 
-        # Generate configurations for specified host-user pairs
-        pairs = flatten (mapAttrsToList (hostname: usernames:
-          map (username: {
-            name = "${hostname}";
-            value = makeSystem hostname username
-                      host_configs.${hostname}
-                      user_configs.${username};
-          }) (validateUsers hostname usernames)
-        ) (validateHosts));
+        # Generate one configuration per host with its assigned users
+        pairs = mapAttrsToList (hostname: usernames:
+          {
+            name = hostname;
+            value = makeSystem
+              hostname
+              host_configs.${hostname}
+              user_configs
+              (validateUsers hostname usernames)
+            ;
+          }
+        ) (validateHosts);
       in
       listToAttrs pairs;
 
@@ -215,7 +245,6 @@
         prop-wsl-no-desktop = makeAssertionCheck "prop-wsl-no-desktop" propertyTests.testWslNoDesktopManager;
         prop-dvorak = makeAssertionCheck "prop-dvorak" propertyTests.testDvorakLayout;
 
-        # Home Manager activation packages can be safely built
       } // (mapAttrs' (name: config:
         nameValuePair "nixos-config-${name}" config.config.system.build.etc
       ) nixosConfigurations)
