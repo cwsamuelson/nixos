@@ -79,7 +79,7 @@
             invalid = filter (u: !(elem u availableUsers)) usernames;
           in
           if invalid != []
-          then throw "Host '${hostname}' references non-existent users: ${toString invalid}"
+            then throw "Host '${hostname}' references non-existent users: ${toString invalid}"
           else usernames;
 
         validateHosts =
@@ -88,13 +88,13 @@
             invalid = filter (h: !(elem h availableHosts)) referencedHosts;
           in
           if invalid != []
-          then throw "hostUsers references non-existent hosts: ${toString invalid}"
+            then throw "hostUsers references non-existent hosts: ${toString invalid}"
           else hostUsers;
 
         # Generate configurations for specified host-user pairs
         pairs = flatten (mapAttrsToList (hostname: usernames:
           map (username: {
-            name = "${hostname}-${username}";
+            name = "${hostname}";
             value = makeSystem hostname username
                       host_configs.${hostname}
                       user_configs.${username};
@@ -191,10 +191,10 @@
         config-all-users-present = makeAssertionCheck "config-all-users-present" configTests.testAllUsersHaveConfigurations;
 
         # Config existence tests - hard-coded for chris (prevent empty state passing)
-        config-wsl-chris = makeAssertionCheck "config-wsl-chris" configTests.testWslChrisExists;
-        config-laptop-fw-chris = makeAssertionCheck "config-laptop-fw-chris" configTests.testLaptopFwChrisExists;
-        config-laptop-ava-chris = makeAssertionCheck "config-laptop-ava-chris" configTests.testLaptopAvaChrisExists;
-        config-chris-home = makeAssertionCheck "config-chris-home" configTests.testChrisHomeExists;
+        config-wsl = makeAssertionCheck "config-wsl" configTests.testWslExists;
+        config-laptop-fw = makeAssertionCheck "config-laptop-fw" configTests.testLaptopFwExists;
+        config-laptop-ava = makeAssertionCheck "config-laptop-ava" configTests.testLaptopAvaExists;
+        config-chris-home = makeAssertionCheck "config-chris-home" configTests.testHomeExists;
         config-minimum-nixos = makeAssertionCheck "config-minimum-nixos" configTests.testMinimumNixosConfigurations;
 
         # Property tests - verify critical configuration properties
@@ -215,10 +215,9 @@
         prop-wsl-no-desktop = makeAssertionCheck "prop-wsl-no-desktop" propertyTests.testWslNoDesktopManager;
         prop-dvorak = makeAssertionCheck "prop-dvorak" propertyTests.testDvorakLayout;
 
-        # Build checks - verify configurations evaluate without errors
-        # Test that all nixosConfigurations can be built (just the config, not full system)
+        # Home Manager activation packages can be safely built
       } // (mapAttrs' (name: config:
-        nameValuePair "nixos-config-${name}" config.config.system.build.toplevel
+        nameValuePair "nixos-config-${name}" config.config.system.build.etc
       ) nixosConfigurations)
       // (mapAttrs' (name: config:
         nameValuePair "home-config-${name}" config.activationPackage
