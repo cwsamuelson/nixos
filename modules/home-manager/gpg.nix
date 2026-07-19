@@ -16,8 +16,12 @@ in
       mutableKeys = true;
       mutableTrust = true;
 
-      #settings = {
-      #};
+      publicKeys = [
+        {
+          source = ./gpg-pubkey.asc;
+          trust = "ultimate";
+        }
+      ];
     };
 
     home.packages = with pkgs; [

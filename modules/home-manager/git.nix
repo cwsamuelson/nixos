@@ -13,6 +13,11 @@ in
       git = {
         enable = true;
 
+        signing = {
+          key = "4CB9 9252 10D5 D929 6812  1D30 1D81 2756 8D7B 05FF";
+          signByDefault = true;
+        };
+
         settings = {
           init.defaultBranch = "main";
 
@@ -27,7 +32,7 @@ in
             signingkey = "4CB9 9252 10D5 D929 6812  1D30 1D81 2756 8D7B 05FF";
           };
 
-          # commit.gpgsign = true;
+          commit.gpgsign = true;
 
           aliases = {
             root = "rev-parse --show-toplevel";
