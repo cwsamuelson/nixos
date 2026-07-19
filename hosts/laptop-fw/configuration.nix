@@ -3,11 +3,21 @@
     ./hardware-configuration.nix
   ];
 
-  # fwupd for framework
-  services.fwupd.enable = true;
-  services.fprintd.enable = true;
+  gui.enable = true;
+
+  services = {
+    # fwupd for framework
+    fwupd.enable = true;
+    fprintd.enable = true;
+
+    # nfs support
+    rpcbind.enable = true;
+  };
 
   boot = {
+    # nfs support
+    supportedFilesystems = [ "nfs" ];
+
     loader = {
       grub.enable = false;
       systemd-boot.enable = true;

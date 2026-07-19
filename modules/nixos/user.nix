@@ -3,7 +3,7 @@ let
   # Only enable autologin if a desktop manager is configured and there's exactly one user
   hasDesktopManager = config.desktopmanager.enable != null;
   hasSingleUser = (builtins.length users) == 1;
-  firstUser = if hasSingleUser then (builtins.head users) else null;
+  firstUser = (builtins.head users);
 in
 {
   config = {

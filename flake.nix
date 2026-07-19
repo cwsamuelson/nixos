@@ -31,14 +31,11 @@
 
     # Re-organizing based on:
     # https://github.com/Ev-Mu/home-manager
-    makeSystem = hostname: host_config: user_configs: hostUsernames:
+    makeSystem = hostname: host_config: user_configs:
     let
       host = {
         inherit hostname;
       };
-
-      # Filter user configs to only those assigned to this host
-      filteredUserConfigs = filterAttrs (username: _: elem username hostUsernames) user_configs;
 
       # Convert to list and add uid/gid fields
       userListRaw = attrValues (mapAttrs (id: config: {
@@ -50,7 +47,7 @@
         username = toLower (head (splitString " " (config.name or id)));
         uid = config.uid or null;
         gid = config.gid or null;
-      }) filteredUserConfigs);
+      }) user_configs);
 
       # Auto-assign uid/gid for users that don't specify them
       users =
@@ -125,8 +122,8 @@
             value = makeSystem
               hostname
               host_configs.${hostname}
-              user_configs
-              (validateUsers hostname usernames)
+              # Filter user configs to only those assigned to this host
+              (filterAttrs (username: _: elem username hostUsers.${hostname}) user_configs)
             ;
           }
         ) (validateHosts);
