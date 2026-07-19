@@ -10,6 +10,7 @@
     ./mail.nix
     ./neovim
     ./nix-your-shell.nix
+    ./ranger
     ./shells
     ./tmux.nix
     ./todoman.nix

@@ -14,11 +14,9 @@ packagesModule // {
     lazydocker.enable = true;
     # HM manual says this exists, but it doesn't build
     lazysql.enable = true;
-    ranger.enable = true;
     password-store.enable = true;
   };
 
-  shells.enable = "bash";
   direnv.enable = true;
   fzf.enable = true;
   git.enable = true;
@@ -26,6 +24,8 @@ packagesModule // {
   kitty.enable = true;
   mail.enable = true;
   nys.enable = false;
+  ranger.enable = true;
+  shells.enable = "bash";
   yazi.enable = false;
 
   home = packagesModule.home // {
