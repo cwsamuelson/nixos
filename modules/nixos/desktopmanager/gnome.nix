@@ -20,10 +20,15 @@ in
   };
 
   config = mkIf (cfg.enable == name) {
-    services.desktopManager.${name}.enable = true;
+    services = {
+      desktopManager.${name}.enable = true;
 
-    # Set default session for display manager (required for autologin)
-    services.displayManager.defaultSession = "gnome";
+      # Set default session for display manager (required for autologin)
+      displayManager.defaultSession = "gnome";
+
+      # gpg+ssh config; if not using that, should probably be true?
+      gnome.gcr-ssh-agent.enable = false;
+    };
 
     # Workaround for GNOME autologin:
     #   https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229

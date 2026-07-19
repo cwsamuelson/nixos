@@ -24,7 +24,10 @@ in
           user = {
             name = user.name;
             email = user.email;
+            signingkey = "4CB9 9252 10D5 D929 6812  1D30 1D81 2756 8D7B 05FF";
           };
+
+          # commit.gpgsign = true;
 
           aliases = {
             root = "rev-parse --show-toplevel";

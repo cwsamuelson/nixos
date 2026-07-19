@@ -37,7 +37,9 @@ in
       pinentry.package = pkgs.pinentry-curses;
 
       # would like to setup gpg+ssh keys to have consistent, root identity keys
-      #sshKeys = [];
+      sshKeys = [
+        "2F148DA70CCEBC6860C7653A79983EE9493ADBC9"
+      ];
     };
   };
 }
