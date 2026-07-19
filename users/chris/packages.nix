@@ -52,9 +52,9 @@
 
     # # https://secretspec.dev/
     # # https://devenv.sh/integrations/secretspec/#configuration-optional
-    # lastpass-cli
+    lastpass-cli
     # secretspec
-    # pass
+    pass
 
     # # https://git.zx2c4.com/ctmg/about/
     # ctmg

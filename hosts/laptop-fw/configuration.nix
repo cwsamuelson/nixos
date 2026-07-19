@@ -4,6 +4,7 @@
   ];
 
   gui.enable = true;
+  gpg.enable = true;
 
   services = {
     # fwupd for framework

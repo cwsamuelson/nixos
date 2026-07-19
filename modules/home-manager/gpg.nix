@@ -14,29 +14,29 @@ in
       homedir = "${config.xdg.dataHome}/gnupg";
 
       mutableKeys = true;
-      mutableTrust = false;
+      mutableTrust = true;
 
       #settings = {
       #};
     };
 
     home.packages = with pkgs; [
-      # pinentry
+      pinentry-curses
     ];
 
     services.gpg-agent = {
       enable = true;
 
+      enableSshSupport = true;
+      enableScDaemon = true;
+
       enableBashIntegration = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
 
-      pinentry = {
-        package = pkgs.pinentry-curses;
-      };
+      pinentry.package = pkgs.pinentry-curses;
 
       # would like to setup gpg+ssh keys to have consistent, root identity keys
-      #enableSshSupport = true;
       #sshKeys = [];
     };
   };

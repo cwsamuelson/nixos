@@ -12,7 +12,6 @@ packagesModule // {
     difftastic.enable = true;
 
     lazydocker.enable = true;
-    # HM manual says this exists, but it doesn't build
     lazysql.enable = true;
     password-store.enable = true;
   };
@@ -42,7 +41,7 @@ packagesModule // {
     # color=always can cause problems sometimes :(
     # piping to commands and files will include the command characters
     # my usage of these commands doesn't typically run into that problem
-    shellAliases = {
+    shellAliases = with pkgs; {
       # search on path
       # how to accept arguments?
       # name = "find ${PATH//:/\/ } -iname 'search term'
@@ -51,7 +50,7 @@ packagesModule // {
       # name = "find \"${array[@]}\" -iname "$file"
 
       # When stand-alone, may want to run as `switch-home --extra-experimental-features 'nix-command flakes'`
-      switch-home = "home-manager switch --flake ~/projects/nixos";
+      switch-home = "${home-manager}/bin/home-manager switch --flake ~/projects/nixos";
       switch-os = "nixos-rebuild switch --flake ~/projects/nixos";
 
       # This is hypothetical, for now..
@@ -70,8 +69,7 @@ packagesModule // {
       # -i case insensitive
       grep = "grep -Ini --color=always --exclude-dir={.git,.venv,.devbox,.devenv,build,.obsidian,.conan,.conan2,.svn}";
       oops = "sudo $(history -p !!)";
-      cat = "bat --wrap=never";
-      dbr = "devbox run";
+      cat = "${bat}/bin/bat --wrap=never";
       docker-clean = "docker system df && docker container prune -f -a && docker image prune -f && docker builder prune -f && docker volume prune -a -f && docker system df";
       podman-clean = "podman system df && podman container prune -f && podman image prune -f && podman builder prune -f && podman volume prune -f && podman system df";
     };
