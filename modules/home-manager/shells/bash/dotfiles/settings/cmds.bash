@@ -15,7 +15,7 @@ varfind() {
 }
 
 highlight() {
-  egrep --color=always "''${1}|$" $2
+  egrep --color=always "${1}|$" $2
 }
 
 tre() { command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
