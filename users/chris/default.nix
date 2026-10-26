@@ -70,6 +70,7 @@ packagesModule // {
       grep = "grep -Ini --color=always --exclude-dir={.git,.venv,.devbox,.devenv,build,.obsidian,.conan,.conan2,.svn}";
       oops = "sudo $(history -p !!)";
       cat = "${bat}/bin/bat --wrap=never";
+      slowcat = "pv -l -L 5 -q";
       docker-clean = "docker system df && docker container prune -f -a && docker image prune -f && docker builder prune -f && docker volume prune -a -f && docker system df";
       podman-clean = "podman system df && podman container prune -f && podman image prune -f && podman builder prune -f && podman volume prune -f && podman system df";
     };

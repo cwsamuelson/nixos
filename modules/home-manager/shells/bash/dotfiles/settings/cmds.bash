@@ -11,14 +11,22 @@ psaux() {
 }
 
 varfind() {
-  find $${!1//:/ } -name $2 2>/dev/null
+  find ${!1//:/ } -name $2 2>/dev/null
 }
 
 highlight() {
-  egrep --color=always "${1}|$" $2
+  if command -v rg -v &>/dev/null; then
+    rg --passthru $@
+  elif command -v egrep &>/dev/null; then
+    egrep --color=always "${1}|$" $2
+  else
+    grep $@
+  fi
 }
 
-tre() { command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null; }
+tre() {
+  command tre "$@" -e && source "/tmp/tre_aliases_$USER" 2>/dev/null;
+}
 
 incognito() {
   if [[ -v oldhistfile ]] ; then

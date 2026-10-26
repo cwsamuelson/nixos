@@ -16,6 +16,7 @@
     devbox
     devenv
     copier
+    witr
 
     # regex101.com substitutes:
     rgx # also allows for grep-like filtering

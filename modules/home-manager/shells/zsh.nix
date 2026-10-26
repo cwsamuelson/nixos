@@ -29,6 +29,8 @@ in
       cdpath = [
         "projects"
         "repos"
+        "sandoxes"
+        "rad"
       #  "wrappers"
       ];
 
